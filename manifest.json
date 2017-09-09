@@ -1,0 +1,6 @@
+{
+  "name": "advice-tool-car",
+  "short_name": "advice-tool-car",
+  "start_url": "/",
+  "display": "standalone"
+}
