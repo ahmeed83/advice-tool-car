@@ -1,0 +1,162 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+
+<dom-module id="advice-tool-car-app">
+  <template>
+    <style>
+       :host {
+        display: block;
+        font-family: Roboto, Noto, sans-serif;
+      }
+
+      paper-slider.green {
+        --paper-slider-knob-color: var(--paper-green-900);
+        --paper-slider-active-color: var(--paper-green-500);
+        width: 100%;
+        --paper-slider-input: {
+          width: 60px
+        }
+        ;
+      }
+
+      p.thick {
+        font-weight: bold;
+      }
+
+      #container {
+        max-width: 700px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      #card-disel {
+        max-width: 200px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      #card-petrol {
+        max-width: 200px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      #card-electrc {
+        max-width: 200px;
+        width: 90%;
+        margin: 0 auto;
+      }
+    </style>
+
+    <div id="container">
+      <br/>
+      <br/>
+      <p class="thick">Distance:</p>
+      long <span style="padding-left:190px;"></span> short <span style="padding-left:160px;"></span> Limited
+      <paper-slider class="green" value="{{chosen}}" min='1' max='3' pin snaps max-markers="3" step="1">
+      </paper-slider>
+
+      <br/>
+      <p class="thick">Tax:</p>
+      Veel <span style="padding-left:190px;"></span> Weinig <span style="padding-left:170px;"></span> Null
+      <paper-slider class="green" value="{{chosen2}}" min='1' max='3' pin snaps max-markers="3" step="1">
+      </paper-slider>
+
+      <br/>
+      <p class="thick">Insurance:</p>
+      Veel <span style="padding-left:190px;"></span> Weinig <span style="padding-left:170px;"></span> Null
+      <paper-slider class="green" value="{{chosen3}}" min='1' max='3' pin snaps max-markers="3" step="1">
+      </paper-slider>
+      <br/> <br/>
+
+      <paper-card style$="opacity: {{dieselCar}};" id="card-disel" heading="Diesel car" alt="Emmental">
+        <div class="card-content">
+        </div>
+      </paper-card>
+      <paper-card style$="opacity: {{petrolCar}};" id="card-petrol" heading="Petrol car" alt="Emmental">
+        <div class="card-content">
+        </div>
+      </paper-card>
+      <paper-card style$="opacity: {{electricCar}};" id="card-electrc" heading="Electrec car" alt="Emmental">
+        <div class="card-content">
+        </div>
+      </paper-card>
+
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AdviceToolCarApp extends Polymer.Element {
+      static get is() { return 'advice-tool-car-app'; }
+      static get properties() {
+        return {
+          chosen: {
+            value: Number
+          },
+          dieselCar: {
+            type: Number,
+            computed: 'getDieselCar(chosen, chosen2, chosen3)'
+          },
+          petrolCar: {
+            type: Number,
+            computed: 'getPetrolCar(chosen, chosen2, chosen3)'
+          },
+          electricCar: {
+            type: Number,
+            computed: 'getElectricCar(chosen, chosen2, chosen3)'
+          }
+        };
+      }
+
+      getDieselCar(chosen, chosen2, chosen3) {
+        let diesel = 0.1;
+        if(chosen == 1) {
+          diesel += 0.3;
+        } 
+        if(chosen2 == 1) {
+          diesel += 0.3;
+        }
+        if(chosen3 == 1) {
+          diesel += 0.4;
+        }
+        return diesel;
+      }
+
+      getPetrolCar(chosen, chosen2, chosen3) {
+        let patrol = 0.1;
+        if(chosen == 2) {
+          patrol += 0.3;
+        } 
+        if(chosen2 == 2) {
+          patrol += 0.3;
+        }
+        if(chosen3 == 2) {
+          patrol += 0.4;
+        }
+        return patrol;
+      }
+
+      getElectricCar(chosen, chosen2, chosen3) {
+        let electric = 0.1;
+        if(chosen == 3) {
+          electric += 0.3;
+        } 
+        if(chosen2 == 3) {
+          electric += 0.3;
+        }
+        if(chosen3 == 3) {
+          electric += 0.4;
+        }
+        return electric;
+      }
+    }
+
+    window.customElements.define(AdviceToolCarApp.is, AdviceToolCarApp);
+  </script>
+</dom-module>
